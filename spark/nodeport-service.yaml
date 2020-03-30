@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: spark-k8s-jupyter
+  name: nodeport-park-k8s-jupyter
+spec:
+  ports:
+  - port: 8888
+    nodePort: 30100
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: spark-k8s-jupyter
+  type: NodePort

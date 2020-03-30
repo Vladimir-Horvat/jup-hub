@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spark-k8s-jupyter
+  name: spark-k8s-jupyter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark-k8s-jupyter
+  template:
+    metadata:
+      labels:
+        app: spark-k8s-jupyter
+    spec:
+      serviceAccountName: spark-driver
+      securityContext:
+        fsGroup: 777
+      containers:
+      - image: vladohor/spark-k8s-jupyter
+        name: spark-k8s-jupyter
+        command: ["jupyter", "lab", "--ip", "0.0.0.0"]

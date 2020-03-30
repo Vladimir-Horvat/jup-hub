@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spark-k8s-jupyter
+  labels:
+    app: spark-k8s-jupyter
+
+spec:
+  serviceAccountName: spark-driver
+  
+  securityContext:
+    fsGroup: 777
+  
+  containers:
+  - name: jupyter-test-pod
+    image: vladohor/spark-k8s-jupyter
+    imagePullPolicy: Always
+    command: ["jupyter", "lab", "--ip", "0.0.0.0"]
+  restartPolicy: Always
